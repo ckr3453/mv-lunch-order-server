@@ -38,3 +38,7 @@ out/
 
 ### Kotlin ###
 .kotlin
+
+### setting files ###
+/src/main/resources/application-release.yml
+/src/main/resources/application-apikey.yml
