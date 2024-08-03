@@ -19,13 +19,13 @@ import javax.crypto.SecretKey
 
 /**
  * packageName : kr.movements.lunchorder.component
- * fileName    : JwtTokenProvider
+ * fileName    : TokenProvider
  * author      : ckr
  * date        : 24. 8. 2.
  * description :
  */
 @Component
-class JwtProvider(
+class TokenProvider(
     @Value("\${jwt.secret}")
     secretKey: String
 ) {

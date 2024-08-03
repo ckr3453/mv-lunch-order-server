@@ -1,12 +1,12 @@
 package kr.movements.lunchorder.config
 
-import kr.movements.lunchorder.filter.JwtAuthenticationFilter
+import kr.movements.lunchorder.filter.TokenAuthenticationFilter
 import kr.movements.lunchorder.handler.AccessDeniedHandlerImpl
 import kr.movements.lunchorder.handler.AuthenticationEntryPointImpl
 import kr.movements.lunchorder.handler.AuthenticationFailureHandlerImpl
 import kr.movements.lunchorder.handler.AuthenticationSuccessHandlerImpl
 import kr.movements.lunchorder.service.CustomOAuth2UserService
-import kr.movements.lunchorder.util.JwtProvider
+import kr.movements.lunchorder.util.TokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -30,7 +30,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 @Configuration
 @EnableWebSecurity
 class SecurityConfig (
-    private val jwtProvider: JwtProvider,
+    private val tokenProvider: TokenProvider,
     private val customOAuth2UserService: CustomOAuth2UserService,
 ){
 
@@ -61,12 +61,12 @@ class SecurityConfig (
             }
             .oauth2Login { oauth2LoginConfigurer ->
                 oauth2LoginConfigurer.failureHandler(AuthenticationFailureHandlerImpl())
-                oauth2LoginConfigurer.successHandler(AuthenticationSuccessHandlerImpl(jwtProvider))
+                oauth2LoginConfigurer.successHandler(AuthenticationSuccessHandlerImpl(tokenProvider))
                 oauth2LoginConfigurer.userInfoEndpoint { userInfoEndPointConfig ->
                     userInfoEndPointConfig.userService(customOAuth2UserService)
                 }
             }
-            .addFilterBefore(JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(TokenAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
