@@ -3,7 +3,7 @@ package kr.movements.lunchorder.handler
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import kr.movements.lunchorder.component.JwtProvider
+import kr.movements.lunchorder.util.JwtProvider
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 
