@@ -1,0 +1,30 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /mv-lunch-order/api
+
+spring:
+  application:
+    name: mv-lunch-order
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;
+    username: sa
+    password:
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      format_sql: true
+      show_sql: true
+
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+jwt:
+  secret: 86c50a30e8a6ab2ac30aadaa248df76ed547c54c53986bb065cc79c7a2f2c86cc0c71534c7a8652fdc17d885a88d88b2f0cb25ddf53bc3dfa9436aec374e96ca
+
