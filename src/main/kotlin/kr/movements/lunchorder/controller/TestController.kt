@@ -21,6 +21,6 @@ class TestController {
     @Operation(summary = "hello", description = "hello world")
     @GetMapping("/test")
     fun helloWorld(): ResponseEntity<String> {
-        return ResponseEntity.ok("hello World!")
+        return ResponseEntity.ok("hello World!!")
     }
 }
