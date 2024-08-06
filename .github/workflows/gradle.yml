@@ -85,7 +85,7 @@ jobs:
 
       - name: docker pull and run
         run: |
-          echo test!
+          C:\Users\ckr\Desktop\workspaces\mv-lunch-order\docker-pull-and-run.bat
 #          docker stop ${{ github.event.repository.name }}
 #          docker rm ${{ github.event.repository.name }}
 #          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
