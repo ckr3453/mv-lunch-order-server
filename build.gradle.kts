@@ -43,11 +43,8 @@ repositories {
 
 dependencies {
     annotationProcessor("org.projectlombok:lombok")
-
     compileOnly("org.projectlombok:lombok")
-
     runtimeOnly("org.postgresql:postgresql")
-//    runtimeOnly("com.h2database:h2")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
