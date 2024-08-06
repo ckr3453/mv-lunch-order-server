@@ -1,3 +1,10 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
 name: Java CI with Gradle
 
 on:
@@ -54,8 +61,8 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-#    - name: extract jar before image build
-#      run: java -Djarmode=tools -jar ./build/libs/${{ secrets.JAR_NAME }} extract --layers --launcher
+    - name: extract jar before image build
+      run: java -Djarmode=tools -jar ./build/libs/${{ secrets.JAR_NAME }} extract --layers --launcher
 
     - name: docker image build
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }} .
