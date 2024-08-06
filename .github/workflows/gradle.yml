@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
+      packages: write
+    
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -26,6 +27,18 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+      
+    - name: create application-apikey.yml file
+      run: |
+        cd ./src/main/resources
+        touch ./application-apikey.yml
+        echo " ${{ secrets.APIKEY_YML }} >> ./application-apikey.yml
+
+    - name: create application-release.yml file
+      run: |
+        cd ./src/main/resources
+        touch ./application-release.yml
+        echo " ${{ secrets.RELEASE_YML }} >> ./application-release.yml
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
