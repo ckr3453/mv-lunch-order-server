@@ -62,7 +62,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: extract jar before image build
-      run: java -Djarmode=tools -jar ./build/libs/${{ secrets.JAR_NAME }} extract --layers --launcher
+      run: java -Djarmode=layertools -jar ./build/libs/${{ secrets.JAR_NAME }} extract
 
     - name: docker image build
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }} .
