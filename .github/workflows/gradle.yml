@@ -69,7 +69,7 @@ jobs:
     #     tags: mv-lunch-order-server:latest
 
     - name: extract jar before image build
-      run: java -Djarmode=layertools -jar ./build/libs/${{ secrets.JAR_NAME }} extract
+      run: java -Djarmode=tools extract --layers --launcher -jar ./build/libs/${{ secrets.JAR_NAME }}
 
     - name: docker image build
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }} .
