@@ -23,7 +23,7 @@ noArg {
 }
 
 group = "kr.movements"
-version = "0.0.1-SNAPSHOT"
+version = "0_0_1-SNAPSHOT"
 
 java {
     toolchain {
@@ -46,8 +46,8 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok")
 
-//    runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.postgresql:postgresql")
+//    runtimeOnly("com.h2database:h2")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
