@@ -53,7 +53,7 @@ jobs:
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: bootJar -x test
+        arguments: clean bootJar
 
     - name: docker login
       uses: docker/login-action@v2
@@ -68,11 +68,14 @@ jobs:
     #     push: true
     #     tags: mv-lunch-order-server:latest
 
+    - name: extract jar before image build
+      run: java -Djarmode=layertools -jar build/libs/${{ secrets.JAR_NAME }} extract
+
     - name: docker image build
-      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mv-lunch-order-server .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }} .
       
     - name: docker Hub push
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/mv-lunch-order-server
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
 
   deploy:
     needs: build
@@ -89,10 +92,10 @@ jobs:
 
       - name: docker pull and run
         run: |
-          docker stop mv-lunch-order-server
-          docker rm mv-lunch-order-server
-          docker pull ckr3453/mv-lunch-order-server
-          docker run -d -p 8099:8088 --name mv-lunch-order-server ckr3453/mv-lunch-order-server:latest
+          docker stop ${{ github.event.repository.name }}
+          docker rm ${{ github.event.repository.name }}
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+          docker run -d -p 8099:8088 --name ${{ github.event.repository.name }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
