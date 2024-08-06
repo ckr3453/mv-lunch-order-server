@@ -85,7 +85,8 @@ jobs:
 
       - name: docker pull and run
         run: |
-          docker stop ${{ github.event.repository.name }}
-          docker rm ${{ github.event.repository.name }}
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
-          docker run -d -p 8099:8088 --name ${{ github.event.repository.name }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
+          echo test!
+#          docker stop ${{ github.event.repository.name }}
+#          docker rm ${{ github.event.repository.name }}
+#          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
+#          docker run -d -p 8099:8088 --name ${{ github.event.repository.name }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
